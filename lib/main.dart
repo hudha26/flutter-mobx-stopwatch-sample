@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobx/stopwatchLayout.dart';
+import 'package:mobx_stopwatch/stopwatchLayout.dart';
 
 void main() {
   runApp(MaterialApp(

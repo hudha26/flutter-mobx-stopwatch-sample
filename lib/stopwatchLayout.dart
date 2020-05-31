@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx_stopwatch/stores/timer.dart';
+
+final timer = TimerStore();
 
 class StopwatchLayout extends StatelessWidget {
   @override
@@ -11,9 +15,13 @@ class StopwatchLayout extends StatelessWidget {
             flex: 5,
             child: Container(
               alignment: Alignment.center,
-              child: Text('0:00:00',
-                  style:
-                      TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold)),
+              child: Observer(
+                builder: (context) {
+                  return Text(timer.timerText,
+                      style: TextStyle(
+                          fontSize: 40.0, fontWeight: FontWeight.bold));
+                },
+              ),
             ),
           ),
           Expanded(
@@ -24,17 +32,27 @@ class StopwatchLayout extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      RaisedButton(
-                        child: Text("Stop"),
-                        color: Colors.deepOrange,
-                        padding: EdgeInsets.fromLTRB(40.0, 15.0, 40.0, 15.0),
-                        onPressed: () {},
+                      Observer(
+                        builder: (context) {
+                          return RaisedButton(
+                            child: Text("STOP"),
+                            color: Colors.deepOrange,
+                            padding:
+                                EdgeInsets.fromLTRB(40.0, 15.0, 40.0, 15.0),
+                            onPressed: timer.isStop ? null : timer.stop,
+                          );
+                        },
                       ),
-                      RaisedButton(
-                        child: Text("Start"),
-                        color: Colors.teal,
-                        padding: EdgeInsets.fromLTRB(40.0, 15.0, 40.0, 15.0),
-                        onPressed: () {},
+                      Observer(
+                        builder: (context) {
+                          return RaisedButton(
+                            child: Text("RESET"),
+                            color: Colors.cyan,
+                            padding:
+                                EdgeInsets.fromLTRB(40.0, 15.0, 40.0, 15.0),
+                            onPressed: timer.isReset ? null : timer.reset,
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -44,11 +62,16 @@ class StopwatchLayout extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      RaisedButton(
-                        child: Text("Reset"),
-                        color: Colors.cyan,
-                        padding: EdgeInsets.fromLTRB(40.0, 15.0, 40.0, 15.0),
-                        onPressed: () {},
+                      Observer(
+                        builder: (context) {
+                          return RaisedButton(
+                            child: Text("START"),
+                            color: Colors.teal,
+                            padding:
+                                EdgeInsets.fromLTRB(60.0, 25.0, 60.0, 25.0),
+                            onPressed: timer.isStart ? timer.start : null,
+                          );
+                        },
                       ),
                     ],
                   ),
