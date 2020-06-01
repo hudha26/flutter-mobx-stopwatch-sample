@@ -69,36 +69,6 @@ mixin _$TimerStore on _Timer, Store {
     });
   }
 
-  final _$swAtom = Atom(name: '_Timer.sw');
-
-  @override
-  Stopwatch get sw {
-    _$swAtom.reportRead();
-    return super.sw;
-  }
-
-  @override
-  set sw(Stopwatch value) {
-    _$swAtom.reportWrite(value, super.sw, () {
-      super.sw = value;
-    });
-  }
-
-  final _$durationAtom = Atom(name: '_Timer.duration');
-
-  @override
-  Duration get duration {
-    _$durationAtom.reportRead();
-    return super.duration;
-  }
-
-  @override
-  set duration(Duration value) {
-    _$durationAtom.reportWrite(value, super.duration, () {
-      super.duration = value;
-    });
-  }
-
   final _$_TimerActionController = ActionController(name: '_Timer');
 
   @override
@@ -162,9 +132,7 @@ mixin _$TimerStore on _Timer, Store {
 isStart: ${isStart},
 isStop: ${isStop},
 isReset: ${isReset},
-timerText: ${timerText},
-sw: ${sw},
-duration: ${duration}
+timerText: ${timerText}
     ''';
   }
 }

@@ -14,10 +14,8 @@ abstract class _Timer with Store {
   @observable
   bool isReset = true;
   @observable
-  String timerText = '0:00:00';
-  @observable
+  String timerText = '00:00:00';
   var sw = Stopwatch();
-  @observable
   var duration = const Duration(seconds: 1);
 
   @action
